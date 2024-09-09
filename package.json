@@ -1,0 +1,20 @@
+{
+  "name": "fsd61wde-be",
+  "version": "1.0.0",
+  "description": "Backend Repo for FSD61WDE FSD Demo.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/githubscientist/fsd61wde-be.git"
+  },
+  "author": "Sathish Gnananprakasam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/githubscientist/fsd61wde-be/issues"
+  },
+  "homepage": "https://github.com/githubscientist/fsd61wde-be#readme"
+}
