@@ -1,6 +1,7 @@
 const express = require('express');
 const authRouter = require('./routes/authRoutes');
 const cookieParser = require('cookie-parser');
+const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 
 // setup the routes
 app.use('/auth', authRouter);
+app.use('/users', userRouter);
 
 // export the app
 module.exports = app;
