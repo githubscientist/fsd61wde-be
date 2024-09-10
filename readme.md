@@ -39,7 +39,6 @@ Identify the entities and attributes:
    - description
    - image
    - likes
-   - dislikes
    - comments
 
 3. Comment
