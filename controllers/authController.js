@@ -60,6 +60,21 @@ const authController = {
         });
 
         res.status(200).json({ message: 'User logged in successfully' });
+    },
+    logout: async (req, res) => {
+        // remove the token from the cookie
+        res.clearCookie('token');
+
+        res.status(200).json({ message: 'User logged out successfully' });
+    },
+    me: async (req, res) => {
+        // extract the user id from the request object
+        const userId = req.userId;
+
+        // find the user by id and exclude the password field
+        const user = await User.findById(userId).select('-password -__v');
+
+        res.status(200).json(user);
     }
 }
 
