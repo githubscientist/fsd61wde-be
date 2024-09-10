@@ -1,5 +1,7 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET } = require('../utils/config');
 
 const authController = {
     register: async (req, res) => {
@@ -27,6 +29,37 @@ const authController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
+    },
+    login: async (req, res) => {
+        // extract the details from the request body
+        const { email, password } = req.body;
+
+        // check if the user exists
+        const user = await User.findOne({ email });
+
+        // if the user does not exist
+        if (!user) {
+            return res.status(400).json({ message: 'User not found' });
+        }
+
+        // check if the password is correct
+        const passwordMatch = await bcrypt.compare(password, user.password);
+
+        if (!passwordMatch) {
+            return res.status(400).json({ message: 'Invalid password' });
+        }
+
+        // generate a token
+        const token = jwt.sign({ id: user._id }, JWT_SECRET);
+
+        // store the token in a cookie
+        res.cookie('token', token, {
+            httpOnly: true,
+            sameSite: 'None',
+            secure: true
+        });
+
+        res.status(200).json({ message: 'User logged in successfully' });
     }
 }
 
