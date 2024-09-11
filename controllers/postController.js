@@ -50,6 +50,7 @@ const postController = {
         try {
             const { id } = req.params;
             const { description } = req.body;
+            const userId = req.userId;
 
             if (!description) {
                 return res.status(400).json({ message: 'Description is required' });
@@ -59,6 +60,10 @@ const postController = {
 
             if (!post) {
                 return res.status(404).json({ message: 'Post not found' });
+            }
+
+            if (post.user.toString() !== userId) {
+                return res.status(403).json({ message: 'You are not authorized to update this post' });
             }
 
             post.description = description;
@@ -74,11 +79,16 @@ const postController = {
     deletePost: async (req, res) => {
         try {
             const { id } = req.params;
+            const userId = req.userId;
 
             const post = await Post.findById(id);
 
             if (!post) {
                 return res.status(404).json({ message: 'Post not found' });
+            }
+
+            if (post.user.toString() !== userId) {
+                return res.status(403).json({ message: 'You are not authorized to delete this post' });
             }
 
             await Post.findByIdAndDelete(id);
