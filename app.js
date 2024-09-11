@@ -3,6 +3,7 @@ const authRouter = require('./routes/authRoutes');
 const cookieParser = require('cookie-parser');
 const userRouter = require('./routes/userRoutes');
 const postRouter = require('./routes/postRoutes');
+const commentRouter = require('./routes/commentRoutes');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use('/auth', authRouter);
 app.use('/users', userRouter);
 app.use('/posts', postRouter);
+app.use('/posts', commentRouter);
 
 // export the app
 module.exports = app;

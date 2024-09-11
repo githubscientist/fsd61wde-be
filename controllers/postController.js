@@ -24,7 +24,7 @@ const postController = {
     },
     getAllPosts: async (req, res) => {
         try {
-            const posts = await Post.find().populate('user').populate('comments').sort({ createdAt: -1 });
+            const posts = await Post.find().populate('user', '-password -__v -_id').populate('comments').sort({ createdAt: -1 });
 
             res.status(200).json(posts);
         } catch (error) {

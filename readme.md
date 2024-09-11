@@ -88,3 +88,9 @@ Identify the routes:
    - GET /api/admin/users : Get all users
    - GET /api/admin/posts : Get all posts
    - GET /api/admin/comments : Get all comments
+   - DELETE /api/admin/users/:id : Delete a user by ID
+   - DELETE /api/admin/posts/:id : Delete a post by ID
+   - DELETE /api/admin/comments/:id : Delete a comment by ID
+   - PUT /api/admin/posts/:id : Update a post by ID
+   - PUT /api/admin/comments/:id : Update a comment by ID
+   - PUT /api/admin/users/:id : Update a user by ID
