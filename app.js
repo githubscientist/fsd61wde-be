@@ -4,8 +4,15 @@ const cookieParser = require('cookie-parser');
 const userRouter = require('./routes/userRoutes');
 const postRouter = require('./routes/postRoutes');
 const commentRouter = require('./routes/commentRoutes');
+const cors = require('cors');
 
 const app = express();
+
+// enable cors
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+}));
 
 // middlewares
 // parse the cookies
