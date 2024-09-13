@@ -10,7 +10,7 @@ const app = express();
 
 // enable cors
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://fsd61wde-socify.netlify.app',
     credentials: true
 }));
 
