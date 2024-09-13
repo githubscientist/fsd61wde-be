@@ -24,7 +24,7 @@ const postController = {
     },
     getAllPosts: async (req, res) => {
         try {
-            const posts = await Post.find().populate('user', '-password -__v -_id').populate('comments').sort({ createdAt: -1 });
+            const posts = await Post.find().populate('user', '-password -__v').populate('comments').sort({ createdAt: -1 });
 
             res.status(200).json(posts);
         } catch (error) {
@@ -97,7 +97,31 @@ const postController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
-    }
+    },
+    likePost: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const userId = req.userId;
+
+            const post = await Post.findById(id);
+
+            if (!post) {
+                return res.status(404).json({ message: 'Post not found' });
+            }
+
+            if (post.likes.includes(userId)) {
+                post.likes = post.likes.filter((like) => like.toString() !== userId);
+            } else {
+                post.likes.push(userId);
+            }
+
+            await post.save();
+
+            res.status(200).json({ message: 'Post liked/unliked successfully' });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
 }
 
 module.exports = postController;

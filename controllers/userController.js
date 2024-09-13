@@ -46,6 +46,30 @@ const userController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
+    },
+    updateProfilePicture: async (req, res) => {
+        try {
+            if (!req.file) {
+                return res.status(400).json({ message: 'Please upload a file' });
+            }
+
+            // get the user id from the request object
+            const userId = req.userId;
+            const profilePicture = req.file.path;
+
+            // update the user in the database
+            const updatedUser = await User.findByIdAndUpdate(userId, { profilePicture }, { new: true }).select('-password -__v');
+
+            if (!updatedUser) {
+                // send the error response
+                return res.status(404).json({ message: 'User not found' });
+            }
+
+            // send the updated user as response
+            res.status(200).json({ message: 'Profile picture updated successfully' });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
     }
 }
 

@@ -6,6 +6,7 @@ const postRouter = express.Router();
 
 postRouter.post('/', auth.checkAuth, postController.createPost);
 postRouter.get('/', auth.checkAuth, postController.getAllPosts);
+postRouter.put('/:id/like', auth.checkAuth, postController.likePost);
 postRouter.get('/:id', auth.checkAuth, postController.getPostById);
 postRouter.put('/:id', auth.checkAuth, postController.updatePost);
 postRouter.delete('/:id', auth.checkAuth, postController.deletePost);

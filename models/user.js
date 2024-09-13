@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
         enum: ['user', 'admin'],
         default: 'user'
     },
+    profilePicture: String
 });
 
 // create a model for user and export it.

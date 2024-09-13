@@ -18,6 +18,8 @@ app.use(cors({
 // parse the cookies
 app.use(cookieParser());
 
+app.use('/uploads', express.static('uploads'));
+
 // parse the incoming request with JSON payload
 app.use(express.json());
 
